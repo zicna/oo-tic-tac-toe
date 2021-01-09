@@ -70,7 +70,8 @@ class TicTacToe
             token = current_player
             move(index, token)
             display_board
-        else
+        else 
+        #elsif !valid_move?(index)
             turn
         end
     end
@@ -97,6 +98,7 @@ class TicTacToe
                 @final = comb
                 break
             else
+                #false
                 @final = false
             end
         end
@@ -108,11 +110,11 @@ class TicTacToe
     end
 
     def draw?
-        full? && won? == false ? true : false
+        full? && !won?
     end
 
     def over? 
-        won? || full? ? true : false
+        won? || draw? ? true : false
     end
     #option 1. won? method return a instance variable (I changed final => @final in won? method) and then operate on them
     def winner
@@ -130,9 +132,7 @@ class TicTacToe
     end
     
     def play
-        until over? == true
-            turn
-        end
+        turn until over?
             
         if won? 
             puts "Congratulations #{winner}!"
